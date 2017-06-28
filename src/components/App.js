@@ -13,6 +13,9 @@ class App extends React.Component {
 		this.addFish = this.addFish.bind(this);
 		this.loadSamples = this.loadSamples.bind(this);
 		this.addToOrder = this.addToOrder.bind(this);
+		this.updateFish = this.updateFish.bind(this);
+		this.removeFish = this.removeFish.bind(this);
+		this.removeFromOrder = this.removeFromOrder.bind(this);
 		
 		//Initial state
 		this.state = {
@@ -51,6 +54,12 @@ class App extends React.Component {
 		localStorage.setItem(`order-${ this.props.params.storeId }`, JSON.stringify(nextState.order) );
 	}
 
+	updateFish(key, updatedFish){
+        const fishes = {...this.state.fishes};
+        fishes[key] = updatedFish;
+        this.setState({ fishes });
+	}
+
 	addFish( fish ){
 		// Tip: when updating the state, make a copy first
 		// Copy the current state (performance reasons)
@@ -62,6 +71,12 @@ class App extends React.Component {
 
 		//set state
 		this.setState({ fishes });
+	}
+
+	removeFish(key){
+		const fishes = {...this.state.fishes};
+        fishes[key] = null;
+        this.setState({ fishes });
 	}
 
 	loadSamples(){
@@ -81,6 +96,17 @@ class App extends React.Component {
 		this.setState({ order });
     }
 
+    removeFromOrder( key ){
+		//copy state
+		const order = {...this.state.order};
+
+		// Update or add # of fish purchased
+		delete order[key];
+
+		//update state
+		this.setState({ order });
+    }
+
 	render(){
 		return (
 			<div className="catch-of-the-day">
@@ -92,8 +118,8 @@ class App extends React.Component {
 				    	}
 				    </ul>
 				</div>
-				<Order fishes={this.state.fishes} order={this.state.order} params={ this.props.params } />
-				<Inventory addFish={ this.addFish } loadSamples={this.loadSamples} fishes={this.state.fishes}/>
+				<Order fishes={this.state.fishes} order={this.state.order} params={ this.props.params } removeFromOrder={this.removeFromOrder}/>
+				<Inventory addFish={ this.addFish } loadSamples={this.loadSamples} fishes={this.state.fishes} updateFish={this.updateFish} removeFish={this.removeFish} />
 			</div>
 		);
 	}
