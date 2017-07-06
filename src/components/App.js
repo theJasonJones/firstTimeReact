@@ -55,9 +55,9 @@ class App extends React.Component {
 	}
 
 	updateFish(key, updatedFish){
-        const fishes = {...this.state.fishes};
-        fishes[key] = updatedFish;
-        this.setState({ fishes });
+    const fishes = {...this.state.fishes};
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
 	}
 
 	addFish( fish ){
@@ -75,8 +75,8 @@ class App extends React.Component {
 
 	removeFish(key){
 		const fishes = {...this.state.fishes};
-        fishes[key] = null;
-        this.setState({ fishes });
+    fishes[key] = null;
+    this.setState({ fishes });
 	}
 
 	loadSamples(){
