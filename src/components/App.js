@@ -19,7 +19,7 @@ class App extends React.Component {
 		
 		//Initial state
 		this.state = {
-			fishes: {  },
+			fishes: {},
 			order: {}
 		};
 	}
@@ -124,5 +124,9 @@ class App extends React.Component {
 		);
 	}
 }
+
+App.propTypes = {
+	params: React.PropTypes.object
+};
 
 export default App;
